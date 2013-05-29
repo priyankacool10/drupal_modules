@@ -1,0 +1,60 @@
+<?php
+
+/**
+* Implement hook_menu.
+* Makes a Menu Link in Navigation block.
+*/
+function form_test_menu(){
+  $items['formtest']=array(
+  'title' => 'Personal Info',
+  'page callback' => 'drupal_get_form',
+  'page arguments' => array('form_test_form'),
+  'access callback' => TRUE,
+  );
+  return $items;
+}
+/**
+* Implements hook_form.
+* 
+* Function will be called when Drupal tries to build the form
+* "form_test_form.
+*
+* @param form
+*   Contains the original structure of the form.
+* @param form_submit
+*   Holds all of the submitted values as well as other information.
+* @return
+*   Displays a HTML form
+*/
+function form_test_form($form,&$form_submit) {
+  $form['firstname'] = array(
+    '#title' => t('Firstname'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+  );
+  $form['lastname'] = array(
+    '#title' => t('Lastname'),
+    '#type' => 'textfield',
+  );
+  $form['hidden1'] =array(
+    '#title' => t('Hidden Field'),
+    '#type' => 'textfield',
+    '#value' =>  'http://' .$_SERVER['HTTP_HOST'] 
+		 .$_SERVER['REQUEST_URI'],
+//  '#value' => $_SERVER['REQUEST_URI'],
+  );
+	
+  $form['submit'] = array(
+    '#value' => 'Submit',
+    '#type' => 'submit',
+    );
+  return $form;
+}
+/* Wanting to use this:
+$query_parameters = drupal_get_query_parameters();
+if (!empty($query_parameters['l'])) {
+  $l = $query_parameters['l']
+}
+But it not worked inside form function. Don't know where to place it
+*/
+	
