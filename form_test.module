@@ -37,8 +37,7 @@ function form_test_form($form,&$form_submit) {
     '#type' => 'textfield',
   );
   $form['hidden1'] =array(
-    '#title' => t('Hidden Field'),
-    '#type' => 'textfield',
+    '#type' => 'hiddenfield',
     '#value' =>  'http://' .$_SERVER['HTTP_HOST'] 
 		 .$_SERVER['REQUEST_URI'],
 //  '#value' => $_SERVER['REQUEST_URI'],
